@@ -1,0 +1,10 @@
+{
+  "timestamp": "20260918_175038",
+  "n_blocks": 5,
+  "n_pairs": 30,
+  "n_phases": 8,
+  "total_trials": 1200,
+  "nan_count": 38,
+  "elapsed_s": 9879.5,
+  "mode": "full_waveform"
+}

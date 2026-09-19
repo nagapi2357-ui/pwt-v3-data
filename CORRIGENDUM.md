@@ -2,9 +2,9 @@
 
 **Applies to:** Sutton, A. (2026). *Prime Wave Theory — V3 Experimental Results.* Zenodo. DOI: [10.5281/zenodo.20637347](https://doi.org/10.5281/zenodo.20637347)
 
-**See also:** Sutton, A. (2026). *Prime Resonance Theory: From Factorisation to Frequency.* Zenodo. DOI: [10.5281/zenodo.20541350](https://doi.org/10.5281/zenodo.20541350)
+**See also:** Sutton, A. (2026). *Prime Resonance Theory: A Unified Framework for Frequency Set Optimisation via Number-Theoretic Structure.* Zenodo. DOI: [10.5281/zenodo.20541350](https://doi.org/10.5281/zenodo.20541350)
 
-**Date:** 19 September 2026
+**Date:** 19 September 2026 (revised per review)
 
 ---
 
@@ -34,41 +34,50 @@ Plan C was designed as a **pre-registered falsification test** of the V3 claims,
 4. **Blinded pair ordering** — 30 test pairs (8 prime:prime, 9 composite:composite, 6 prime:composite, 3 non-coprime controls, 4 irrational controls) presented in randomised order across 5 complete blocks.
 5. **Automated data collection** — Python-controlled Arduino + Rigol DS1054Z SCPI capture, removing operator bias.
 
-### Results (1200 trials, 8 metrics)
+### Pooled Results (1200 trials, 8 metrics)
 
 | Metric | PP Mean | CC Mean | p-value | Cohen's d | Significant? |
 |--------|---------|---------|---------|-----------|-------------|
 | RSP (dB) | −28.82 | −28.97 | 0.70 | 0.03 | No |
 | Crest factor | 1.544 | 1.551 | 0.56 | −0.05 | No |
-| **Spectral flatness** | **0.0045** | **0.0036** | **0.0003** | **0.28** | **Yes*** |
+| Spectral flatness | 0.0045 | 0.0036 | 0.0003 | 0.28 | See below |
 | Envelope regularity | 0.291 | 0.293 | 0.71 | −0.03 | No |
 | Cross-correlation peak | 0.874 | 0.872 | 0.43 | 0.06 | No |
 | Phase coherence | 0.802 | 0.798 | 0.34 | 0.07 | No |
 | Vpp | 0.445 | 0.454 | 0.40 | −0.07 | No |
 | Vrms | 0.360 | 0.360 | 0.98 | −0.002 | No |
 
-*Bonferroni-corrected α = 0.00625 for 8 metrics. Spectral flatness survives correction.*
+*Bonferroni-corrected α = 0.00625 for 8 metrics.*
 
-**Seven of eight metrics returned null results.** The three specific metrics claimed in V3 (Vpp, spectral power ratio, cross-correlation) all showed no significant difference between prime and composite ratio pairs.
+**Seven of eight metrics returned null results.** The three specific metrics claimed in V3 (amplitude, spectral sharpness, cross-correlation) showed no significant difference between prime-ratio and composite-ratio pairs.
 
-### The Spectral Flatness Signal
+### Pre-Registered Primary Test: Class B Matched Pairs
 
-One metric — spectral flatness — showed a small but statistically significant difference (p = 0.0003, d = 0.28): prime-ratio pairs produced marginally more spread-out frequency spectra than composite-ratio pairs. However, this result must be interpreted with caution due to hardware limitations (see below) and the small effect size. It was not a pre-registered primary metric.
+The pre-registration specified Class B (matched ratio-magnitude cells) as the primary hypothesis test. All three Class B cells returned null on both RSP and Vpp:
 
-### Hardware Limitations
+| Cell | PP Pair | CC Pair | RSP p-value | RSP d | Vpp p-value | Vpp d |
+|------|---------|---------|-------------|-------|-------------|-------|
+| B1 | PP3 (7:5) | CC7 (36:25) | 0.009 | −0.60 | 0.78 | −0.07 |
+| B2 | PP4 (11:7) | CC2 (25:16) | 0.30 | −0.24 | 0.62 | −0.11 |
+| B3 | PP2 (5:3) | CC9 (27:16) | 0.19 | 0.30 | 0.62 | −0.11 |
 
-The Plan C apparatus had significant limitations that constrain interpretation of all results, including the spectral flatness signal:
+B1 shows a nominally significant RSP difference (p = 0.009), but in the *wrong direction* (CC > PP), does not survive Bonferroni correction across the three cells, and is not supported by any other metric or cell. **The pre-registered primary test is null.**
 
-1. **Channel crosstalk:** The resistive summing network provided near-zero isolation between channels (−7 to +8.5 dB coupling). CH1 and CH2 probe points were not independent measurements.
-2. **Amplitude mismatch:** DDS A produced stable output (0.62–0.66 V), while DDS B was erratic (0.14–0.68 V), with mismatches of 23–107%.
-3. **No buffer amplifiers:** Both DDS outputs fed directly into the summing network with no impedance buffering.
+### Spectral Flatness: An Exploratory Leftover, Not a Signal
 
-These limitations mean the spectral flatness result could reflect frequency-dependent DDS output characteristics rather than any property of the ratio itself.
+The pooled spectral flatness metric showed a nominally significant difference (p = 0.0003, d = 0.28). This result **should not be carried forward** as a finding for the following reasons:
+
+1. **Not a pre-registered primary metric.** The pre-registration specified RSP on Class B cells as the primary test. Spectral flatness was one of eight exploratory metrics.
+2. **Failed abort conditions.** The pre-registration specified amplitude matching within 3 dB and isolation requirements. The apparatus failed both: DDS B amplitude was erratic (0.14–0.68 V) and channel isolation was −7 to +8.5 dB. Under the pre-registration's own rules, the experiment is inconclusive on fine-grained metrics.
+3. **d = 0.28 on a messy summer** is exactly the kind of small effect that arises from frequency-dependent DDS output characteristics, not ratio physics.
+4. **Not supported by Class B.** Class B cells do not show a consistent spectral flatness pattern.
+
+This result is reported for transparency but should not be cited, named as "the spectral flatness signal," or carried into future work.
 
 ### Sanity Checks Passed
 
 - Non-coprime control pairs (e.g., 9:6) matched their reduced forms (3:2) as expected (p > 0.17 on all metrics).
-- Irrational ratios (√2, φ, e/2, π/2) showed no significant difference from either prime or composite strata.
+- Irrational ratios (√2, φ, e/2, π/2) showed no significant difference from either prime or composite strata — consistent with LTI superposition.
 - Block-order effects were not detected.
 
 ## Diagnosis: The V3 Harmonic Confound
@@ -82,33 +91,31 @@ GreenPAK dividers produce square waves, which contain energy at all odd harmonic
 
 This is a mathematical property of harmonic combs and coprimality, not a physical property of the medium or the ratio's "primeness." When the harmonics are removed (Plan C: pure sine waves), the effect disappears.
 
-## Implications for Prime Resonance Theory
+## Implications
 
-The theoretical framework in *Prime Resonance Theory: From Factorisation to Frequency* (DOI 10.5281/zenodo.20541350) made predictions contingent on experimental validation. With the V3 results now unreliable and Plan C returning null on 7/8 metrics:
-
-1. **The claim that prime-ratio frequencies produce superior interference in linear analog circuits is not supported.** LTI (linear time-invariant) theory correctly predicts that a resistive summer's transfer function H(f) depends on frequency, not on the arithmetic properties of frequency ratios.
-2. **The theoretical framework is not falsified in domains where it was not tested.** Plan C tested linear superposition of pure sine waves in a passive circuit — a domain where integer structure has no mechanism to matter. Domains with boundary conditions that enforce integer quantisation (acoustic cavities, vibrating strings, crystal lattices, electromagnetic resonant cavities) remain untested and may warrant future investigation.
-3. **The spectral flatness anomaly** (d = 0.28) is noted for completeness but requires independent replication on hardware with proper channel isolation before any interpretation is warranted.
+1. **The claim that prime-ratio frequencies produce superior interference in linear analog circuits is not supported.** LTI theory correctly predicts that a resistive summer's transfer function H(f) depends on frequency, not on the arithmetic properties of frequency ratios.
+2. **The live content of Prime Resonance Theory is:** integer spectra have prime generators. That is number theory plus boundary-value physics. It did not need V3, and it does not need V3's percentages. The mathematical results (R(S), Spectral Honeycomb Theorem, Prime Harmonic Transform) stand as mathematics. The experimental validation table (§3.3 of the PRT paper, Spearman ρ = 0.736) used V3 data and is now unreliable.
+3. **Linear analog interference is closed as a test domain for primality.** Any future experimental work should start as a new pre-registered question in a system that has an integer mode list (acoustic cavities, crystal resonators, vibrating strings), not be seeded with V3 percentages or the spectral flatness p-value.
 
 ## Corrections to the Record
 
 1. The headline V3 claims (+28% amplitude, +18% sharpness, +22% coherence for prime ratios) **should not be cited as evidence** for prime-ratio superiority in analog interference.
 2. The V3 result is reclassified as a **harmonic-comb artefact** of square-wave signal generation, not a property of the frequency ratios themselves.
-3. The GitHub repository description for `pwt-v3-data` will be updated to reference this corrigendum.
-4. Future versions of *Prime Resonance Theory* will note the null replication result.
+3. The GitHub repository descriptions for `Prime_Maxel-v3` and `pwt-v3-data` have been updated to reference this corrigendum.
+4. The Prime Resonance Theory paper (DOI 10.5281/zenodo.20541350) has been updated with an addendum (§12) noting the null replication.
 
 ## Data Availability
 
-All Plan C data, code, and analysis are available at:
-- **Pre-registration:** `pre-registration.md` (timestamped before data collection)
-- **Raw data:** `scripts/results/runs/` (1200-trial waveform captures + measurement CSVs)
-- **Analysis reports:** `scripts/results/analysis/`
-- **Firmware:** `firmware/arbiter/`
-- **Circuit design:** `circuit-design.md`
+All Plan C data, code, and analysis are deposited in this repository:
 
-## Acknowledgements
-
-Plan C was designed with input from Grok (xAI) for experimental methodology review, and executed with Nagaπ (OpenClaw) for automation and analysis. The pre-registration document incorporated adversarial review to minimise confirmation bias.
+- **Pre-registration:** [`plan-c/pre-registration.md`](plan-c/pre-registration.md) (timestamped before data collection)
+- **Circuit design:** [`plan-c/circuit-design.md`](plan-c/circuit-design.md)
+- **Firmware:** [`plan-c/firmware/`](plan-c/firmware/)
+- **Capture scripts:** [`plan-c/scripts/`](plan-c/scripts/) (arbiter_fast.py, arbiter_full.py, rsp.py)
+- **Raw data — measurement run:** [`plan-c/results/runs/merged_5block/results.csv`](plan-c/results/runs/merged_5block/results.csv)
+- **Raw data — waveform run (1200 trials):** [`plan-c/results/runs/20260918_175038/`](plan-c/results/runs/20260918_175038/) (per-trial .npz waveforms + results.csv)
+- **Analysis reports:** [`plan-c/results/analysis/`](plan-c/results/analysis/)
+- **Test matrix:** [`plan-c/test-matrix.md`](plan-c/test-matrix.md)
 
 ---
 

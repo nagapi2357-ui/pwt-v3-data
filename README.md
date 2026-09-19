@@ -67,3 +67,20 @@ CC BY-SA 4.0 — Tusk Innovations
 
 - Website: [pwt.life](https://pwt.life)
 - Discord: [Nagaπ server](https://discord.gg/nagapi)
+
+---
+
+## Plan C Replication Data (September 2026)
+
+The `plan-c/` directory contains the complete data bundle for the pre-registered replication experiment:
+
+- `pre-registration.md` — Timestamped before data collection
+- `circuit-design.md` — AD9833 dual-DDS circuit with shared 25 MHz TCXO
+- `test-matrix.md` — 30 test pairs across 5 strata
+- `firmware/` — Arduino arbiter firmware
+- `scripts/` — Python capture and analysis scripts
+- `results/runs/merged_5block/` — Per-trial measurement CSV (1200 trials)
+- `results/runs/20260918_175038/` — Full waveform captures (1200 .npz files)
+- `results/analysis/` — Statistical analysis reports
+
+See [CORRIGENDUM.md](CORRIGENDUM.md) for full interpretation.
