@@ -1,5 +1,7 @@
 # Prime Wave Theory — V3 Experimental Data
 
+> **⚠️ CORRIGENDUM (19 September 2026):** A pre-registered replication (Plan C, 1200 trials, pure sine waves) returned null on 7/8 metrics. The V3 effects (+28% amplitude, +18% sharpness, +22% coherence) are attributed to a harmonic confound from square-wave signal generation. See [CORRIGENDUM.md](CORRIGENDUM.md) for the full analysis. Raw data is preserved below for transparency.
+
 Raw waveform data and analysis scripts from the Prime Maxel v3 experiment (Board 3, 22 May 2026).
 
 ## What's Here
@@ -44,7 +46,11 @@ The V3 board drives a torsion ring (transmission line) with sets of square-wave 
 
 ## Results Summary
 
-Prime-ratio frequency sets produce +28% amplitude, +18% spectral sharpness, and +22% coherence vs composite sets. See [V3 paper](https://doi.org/10.5281/zenodo.20541350) and [Prime Resonance Theory](https://doi.org/10.5281/zenodo.20541350).
+> ⚠️ **Not reproduced.** See [CORRIGENDUM.md](CORRIGENDUM.md).
+
+~~Prime-ratio frequency sets produce +28% amplitude, +18% spectral sharpness, and +22% coherence vs composite sets.~~ A pre-registered replication using pure sine waves (Plan C, September 2026) returned null on amplitude, sharpness, and coherence. One metric (spectral flatness) showed a small significant effect (p=0.0003, d=0.28) but requires independent replication due to hardware limitations.
+
+See [V3 paper](https://doi.org/10.5281/zenodo.20637347) and [Prime Resonance Theory](https://doi.org/10.5281/zenodo.20541350).
 
 ## Related Publications
 
